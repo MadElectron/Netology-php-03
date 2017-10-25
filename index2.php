@@ -47,9 +47,6 @@
     shuffle($firstNames);
     shuffle($lastNames);
 
-    echo "<pre>";
-    print_r($firstNameContinents);
-
     foreach (array_combine($firstNames, $lastNames) as $firstName => $lastName) {
         $continentName = $firstNameContinents[$firstName];
         $fantasticAnimalsContinents[$continentName][] = "$firstName $lastName";
