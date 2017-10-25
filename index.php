@@ -28,8 +28,6 @@
         ]
     ];
 
-    $animalsDouble = [];
-
     foreach($animals as $continent) {
         foreach ($continent as $animal) {
             if (count(explode(' ', $animal)) == 2 ) {
@@ -37,9 +35,6 @@
             }
         }
     }
-
-    $firstNames = [];
-    $lastNames = [];
 
     foreach($animalsDouble as $animal) {
         list($firstName, $lastName) = explode(' ', $animal);
@@ -49,8 +44,6 @@
 
     shuffle($firstNames);
     shuffle($lastNames);
-
-    $fantasticAnimals = [];
 
     foreach (array_combine($firstNames, $lastNames) as $firstName => $lastName) {
         $fantasticAnimals[] = "$firstName $lastName";

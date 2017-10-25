@@ -1,5 +1,5 @@
 <?php 
-
+   
     $animals = [
         'Africa' => [
             'African buffalo',
@@ -28,32 +28,36 @@
         ]
     ];
 
-    $animalsDouble = [];
-
-    foreach($animals as $continent) {
+    foreach($animals as $continentName => $continent) {
         foreach ($continent as $animal) {
             if (count(explode(' ', $animal)) == 2 ) {
-                $animalsDouble[] = $animal;
+                $continentsByAnimal[$animal] = $continentName;
             }
         }
     }
 
-    $firstNames = [];
-    $lastNames = [];
-
-    foreach($animalsDouble as $animal) {
+    foreach($continentsByAnimal as $animal => $continent) {
         list($firstName, $lastName) = explode(' ', $animal);
-        $firstNames[] = $firstName;
+        $firstNameContinents[$firstName] = $continent;
         $lastNames[] = $lastName;
     }
+
+    $firstNames = array_keys($firstNameContinents);
 
     shuffle($firstNames);
     shuffle($lastNames);
 
-    $fantasticAnimals = [];
+    echo "<pre>";
+    print_r($firstNameContinents);
 
     foreach (array_combine($firstNames, $lastNames) as $firstName => $lastName) {
-        $fantasticAnimals[] = "$firstName $lastName";
+        $continentName = $firstNameContinents[$firstName];
+        $fantasticAnimalsContinents[$continentName][] = "$firstName $lastName";
     }
 
-    echo implode(', ', $fantasticAnimals);
+    ksort($fantasticAnimalsContinents);
+
+    foreach($fantasticAnimalsContinents as $continentName => $animals) {
+        echo "<h2>$continentName</h2>";
+        echo implode(', ', $animals); 
+    }
