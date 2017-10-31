@@ -28,18 +28,19 @@
         ]
     ];
 
+    $firstNameContinents = [];
+    $lastNames = [];
+
     foreach($animals as $continentName => $continent) {
         foreach ($continent as $animal) {
-            if (count(explode(' ', $animal)) == 2 ) {
-                $continentsByAnimal[$animal] = $continentName;
+            $names = explode(' ', $animal);
+
+            if (count($names) == 2 ) {
+                list($firstName, $lastName) = $names;     
+                $firstNameContinents[$firstName] = $continentName;
+                $lastNames[] = $lastName;                
             }
         }
-    }
-
-    foreach($continentsByAnimal as $animal => $continent) {
-        list($firstName, $lastName) = explode(' ', $animal);
-        $firstNameContinents[$firstName] = $continent;
-        $lastNames[] = $lastName;
     }
 
     $firstNames = array_keys($firstNameContinents);
@@ -47,8 +48,9 @@
     shuffle($firstNames);
     shuffle($lastNames);
 
-    foreach (array_combine($firstNames, $lastNames) as $firstName => $lastName) {
+    foreach ($firstNames as $firstNameNumber => $firstName) {
         $continentName = $firstNameContinents[$firstName];
+        $lastName = $lastNames[$firstNameNumber];
         $fantasticAnimalsContinents[$continentName][] = "$firstName $lastName";
     }
 
